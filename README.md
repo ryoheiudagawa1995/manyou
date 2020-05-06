@@ -22,4 +22,3 @@ rabel
   git push origin master
 ⑦git push heroku master
 ⑧heroku run rails db:migrate
-⑨heroku open
