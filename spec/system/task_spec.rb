@@ -28,7 +28,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         fill_in 'Limit', with: Date.new(2020,6,30)
         click_on '登録する'
         visit tasks_path
-        click_on '終了期限でソートする'
+        click_on '終了期限'
         task_list = all('#limit_row') # タスク一覧を配列として取得するため、View側でidを振っておく
         expect(task_list[0]).to have_content Date.new(2020,5,31)
         expect(task_list[1]).to have_content Date.new(2020,6,30)
@@ -42,7 +42,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         select '低', from: 'priority'
         click_on '登録する'
         visit tasks_path
-        click_on '優先順位でソートする'
+        click_on '優先順位'
         task_list = all('#priority_row') # タスク一覧を配列として取得するため、View側でidを振っておく
         expect(task_list[0]).to have_content '高'
         expect(task_list[1]).to have_content '低'
