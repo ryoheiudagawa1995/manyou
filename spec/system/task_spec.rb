@@ -20,7 +20,21 @@ RSpec.describe 'タスク管理機能', type: :system do
         expect(task_list[1]).to have_content 'task'
       end
     end
+    context '複数のタスクを作成した場合' do
+      it 'タスクが終了期限の昇順に並んでいる' do
+        visit new_task_path
+        fill_in 'Title', with: 'タスク'
+        fill_in 'Content', with: 'コンテンツ'
+        fill_in 'Limit', with: Date.new(2020,6,30)
+        click_on '登録する'
+        visit tasks_path
+        click_on '終了期限でソートする'
+        task_list = all('#limit_row') # タスク一覧を配列として取得するため、View側でidを振っておく
+        expect(task_list[0]).to have_content Date.new(2020,5,31)
+        expect(task_list[1]).to have_content Date.new(2020,6,30)
+    end
   end
+end
   describe 'タスク登録画面' do
     context '必要項目を入力して、createボタンを押した場合' do
       it 'データが保存される' do

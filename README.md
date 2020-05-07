@@ -22,3 +22,10 @@ rabel
   git push origin master
 ⑦git push heroku master
 ⑧heroku run rails db:migrate
+
+バージョン
+Booting Puma
+=> Rails 5.2.4.2 application starting in development
+=> Run `rails server -h` for more startup options
+Puma starting in single mode...
+* Version 3.12.4 (ruby 2.6.5-p114)

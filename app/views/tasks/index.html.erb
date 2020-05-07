@@ -1,5 +1,22 @@
 <p id="notice"><%= notice %></p>
 
+
+<div class="search-form">
+  <%= form_with(url: tasks_path, method: :get, local: true)  do |form| %>
+    <%= form.hidden_field :search, value: 'true' %>
+    <div class="field">
+      <%= form.label :title %>
+      <%= form.text_field :title_search %>
+    </div>
+    <div class="field">
+      <%= form.label :status %>
+      <%= form.select :status_search, [["未着手", "未着手"], ["着手中", "着手中"], ["完了", "完了"]], include_blank: "選択して下さい" %>
+    </div>
+    <div class="actions">
+      <%= form.submit 'search',name: nil%>
+    </div>
+  <% end %>
+</div>
 <h1>Tasks</h1>
 
 <table>
@@ -19,7 +36,7 @@
       <tr>
         <td id='task_row' ><%= task.title %></td>
         <td><%= task.content %></td>
-        <td><%= task.limit %></td>
+        <td id='limit_row'><%= task.limit %></td>
         <td><%= task.status %></td>
         <td><%= task.priority %></td>
         <td><%= link_to 'Show', task %></td>
@@ -31,5 +48,5 @@
 </table>
 
 <br>
-
+<%= link_to '終了期限でソートする', tasks_path(sort_expired: "true") %><Br>
 <%= link_to 'New Task', new_task_path %>

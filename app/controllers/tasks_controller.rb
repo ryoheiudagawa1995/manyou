@@ -2,8 +2,14 @@ class TasksController < ApplicationController
   before_action :set_task, only: %i[show edit update destroy]
 
   def index
-    @tasks = Task.all.order('created_at DESC')
+    if params[:sort_expired].present?
+      @tasks = Task.all.order(:limit)
+    else
+      @tasks = Task.all.order('created_at DESC')
+    end
+    @tasks = Task.search(params[:search], params[:title_search], params[:status_search])
   end
+
 
   def show; end
 
