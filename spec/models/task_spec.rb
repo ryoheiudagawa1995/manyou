@@ -15,18 +15,17 @@ RSpec.describe Task, type: :model do
   end
   context 'scopeメソッドで検索をした場合' do
     before do
-      Task.create(title: "task", content: "sample_task")
-      Task.create(title: "sample", content: "sample_sample")
+      Task.create(title: "task", content: "test", status: "未着手")
+      Task.create(title: "sample", content: "test", status: "未着手")
     end
     it "scopeメソッドでタイトル検索ができる" do
-      expect(Task.search('search', 'task').count).to eq 1
+      expect(Task.search('task', '').count).to eq 1
     end
     it "scopeメソッドでステータス検索ができる" do
-      expect(Task.search('sample_task').count).to eq 1
-    # ここに内容を記載する
+      expect(Task.search('', '未着手').count).to eq 2
     end
     it "scopeメソッドでタイトルとステータスの両方が検索できる" do
-    # ここに内容を記載する
+      expect(Task.search('task', '未着手').count).to eq 1
     end
   end
 end

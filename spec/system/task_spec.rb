@@ -32,9 +32,33 @@ RSpec.describe 'タスク管理機能', type: :system do
         task_list = all('#limit_row') # タスク一覧を配列として取得するため、View側でidを振っておく
         expect(task_list[0]).to have_content Date.new(2020,5,31)
         expect(task_list[1]).to have_content Date.new(2020,6,30)
+      end
+    end
+    context 'scopeメソッドで検索をした場合' do
+      it "scopeメソッドでタイトルで検索できる" do
+        new_task = FactoryBot.create(:second_task)
+        visit tasks_path
+        fill_in 'title_search', with: 'task'
+        click_on "search"
+      expect(page).to have_content 'task'
+      end
+      it "scopeメソッドでstatusで検索できる" do
+        new_task = FactoryBot.create(:second_task)
+        visit tasks_path
+        select '未着手', from: :status_search
+        click_on "search"
+      expect(page).to have_content '未着手'
+      end
+      it "scopeメソッドでタイトルとstatusで検索できる" do
+        new_task = FactoryBot.create(:second_task)
+        visit tasks_path
+        fill_in 'title_search', with: 'task'
+        select '未着手', from: :status_search
+        click_on "search"
+      expect(page).to have_content 'task', '未着手'
+      end
     end
   end
-end
   describe 'タスク登録画面' do
     context '必要項目を入力して、createボタンを押した場合' do
       it 'データが保存される' do
