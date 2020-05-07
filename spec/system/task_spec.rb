@@ -33,6 +33,20 @@ RSpec.describe 'タスク管理機能', type: :system do
         expect(task_list[0]).to have_content Date.new(2020,5,31)
         expect(task_list[1]).to have_content Date.new(2020,6,30)
       end
+      it 'タスクが優先順位の昇順に並んでいる' do
+        visit new_task_path
+        fill_in 'Title', with: 'タスク'
+        fill_in 'Content', with: 'コンテンツ'
+        fill_in 'Limit', with: Date.new(2020,6,30)
+        select '完了', from: 'status'
+        select '低', from: 'priority'
+        click_on '登録する'
+        visit tasks_path
+        click_on '優先順位でソートする'
+        task_list = all('#priority_row') # タスク一覧を配列として取得するため、View側でidを振っておく
+        expect(task_list[0]).to have_content '高'
+        expect(task_list[1]).to have_content '低'
+      end
     end
     context 'scopeメソッドで検索をした場合' do
       it "scopeメソッドでタイトルで検索できる" do

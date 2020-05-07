@@ -38,15 +38,17 @@
         <td><%= task.content %></td>
         <td id='limit_row'><%= task.limit %></td>
         <td><%= task.status %></td>
-        <td><%= task.priority %></td>
+        <td id='priority_row'><%= task.priority %></td>
         <td><%= link_to 'Show', task %></td>
         <td><%= link_to 'Edit', edit_task_path(task) %></td>
         <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
+    <%= paginate @tasks %>
   </tbody>
 </table>
 
 <br>
+<%= link_to '優先順位でソートする', tasks_path(sort_priority_expired: "true") %><Br>
 <%= link_to '終了期限でソートする', tasks_path(sort_expired: "true") %><Br>
 <%= link_to 'New Task', new_task_path %>
