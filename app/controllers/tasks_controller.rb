@@ -1,15 +1,16 @@
 class TasksController < ApplicationController
   before_action :set_task, only: %i[show edit update destroy]
+  before_action :authenticate_user
 
   def index
     if params[:sort_expired].present?
-      @tasks = Task.all.order(:limit).page(params[:page]).per(5)
+      @tasks = current_user.tasks.order(:limit).page(params[:page]).per(5)
     elsif params[:sort_priority_expired].present?
-      @tasks = Task.all.order(:priority).page(params[:page]).per(5)
+      @tasks = current_user.tasks.order(:priority).page(params[:page]).per(5)
     elsif params[:search].present?
-      @tasks = Task.search(params[:title_search], params[:status_search]).page(params[:page]).per(5)
+      @tasks = current_user.tasks.search(params[:title_search], params[:status_search]).page(params[:page]).per(5)
     else
-      @tasks = Task.all.order(created_at: :DESC).page(params[:page]).per(5)
+      @tasks = current_user.tasks.order(created_at: :DESC).page(params[:page]).per(5)
     end
 
   end
@@ -24,7 +25,7 @@ class TasksController < ApplicationController
   def edit; end
 
   def create
-    @task = Task.new(task_params)
+    @task = current_user.tasks.build(task_params)
 
     if @task.save
       redirect_to @task, notice: 'Task was successfully created.'

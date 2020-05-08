@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_secure_password
   before_validation { email.downcase! }
+  has_many :tasks
 
   validates :password, presence: true, length: { minimum: 6 }
   validates :name,  presence: true, length: { maximum: 30 }
