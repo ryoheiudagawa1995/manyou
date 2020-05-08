@@ -1,7 +1,10 @@
 class Task < ApplicationRecord
+  enum priority:[:高,:中,:低]
+  belongs_to :user
+
   validates :title, presence: true
   validates :content, presence: true
-  enum priority:[:高,:中,:低]
+
 
   scope :search, ->(title_search, status_search) do
     if title_search.present? && status_search.present?
