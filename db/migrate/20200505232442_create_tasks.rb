@@ -3,9 +3,9 @@ class CreateTasks < ActiveRecord::Migration[5.2]
     create_table :tasks do |t|
       t.string :title
       t.string :content
-      t.string :limit
-      t.string :status
-      t.string :priority
+      t.date :limit, default: '2020/12/31'
+      t.string :status, default: '未着手'
+      t.integer :priority
 
       t.timestamps
     end
