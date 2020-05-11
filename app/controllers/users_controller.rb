@@ -16,7 +16,6 @@ class UsersController < ApplicationController
     end
   end
   def show
-    binding.pry
     if current_user.id == params[:id].to_i
       @user = User.find(params[:id])
     else

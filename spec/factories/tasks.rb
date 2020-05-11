@@ -5,6 +5,7 @@ FactoryBot.define do
     status { '未着手' }
     priority { '高' }
     content { 'test_content' }
+    association :user
   end
 
   factory :second_task, class: Task do
@@ -13,5 +14,6 @@ FactoryBot.define do
     status { '完了' }
     priority { '中' }
     content { 'test2_content' }
+    association :user
   end
 end

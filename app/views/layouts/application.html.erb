@@ -20,6 +20,8 @@
       <%= link_to "Sign up", new_user_path %>
       <%= link_to "Login", new_session_path %>
     <% end %>
+    <%= link_to "タスク一覧", tasks_path %>
+    <%= link_to "管理者画面", admin_users_path %>
     <%= yield %>
   </body>
 </html>

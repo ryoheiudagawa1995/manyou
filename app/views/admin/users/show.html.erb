@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Content</th>
+      <th>Limit</th>
+      <th>Status</th>
+      <th>Priority</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tasks.each do |task| %>
+      <tr>
+        <td id='task_row' ><%= task.title %></td>
+        <td><%= task.content %></td>
+        <td id='limit_row'><%= task.limit %></td>
+        <td><%= task.status %></td>
+        <td id='priority_row'><%= task.priority %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Back', admin_users_path %>
