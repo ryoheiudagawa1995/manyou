@@ -11,16 +11,12 @@ class User < ApplicationRecord
   validates :email, presence: true, length: { maximum: 255 }, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }, uniqueness: true
 
   private
+
   def check_destroy
-    if User.where(admin: true).count == 1 && self.admin == true
-      throw :abort
-    end
+    throw :abort if User.where(admin: true).count == 1 && admin == true
   end
 
   def check_update
-    if User.where(admin: true).count == 1 && self.admin == false
-      throw :abort
-    end
+    throw :abort if User.where(admin: true).count == 1 && admin == false
   end
-
 end

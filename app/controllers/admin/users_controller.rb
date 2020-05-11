@@ -2,7 +2,6 @@ class Admin::UsersController < ApplicationController
   before_action :set_task, only: %i[show edit update destroy]
   before_action :set_admin
 
-
   def index
     @users = User.all
   end
@@ -18,32 +17,36 @@ class Admin::UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      redirect_to admin_users_path, notice: 'Task was successfully created.'
+      redirect_to admin_users_path, notice: 'User was successfully created.'
     else
       render :new
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @user.update(user_params)
-      redirect_to admin_users_path, notice: 'Task was successfully updated.'
+      redirect_to admin_users_path, notice: 'User was successfully updated.'
     else
+      flash[:alert] = "編集に失敗しました。"
       render :edit
     end
   end
 
   def destroy
-    @user.destroy
-    redirect_to admin_users_path, notice: 'Task was successfully destroyed.'
+    if @user.destroy
+      redirect_to admin_users_path, notice: 'User was successfully destroyed.'
+    else
+      flash[:alert] = "削除に失敗しました。"
+    end
   end
 
   private
+
   def set_admin
     user = current_user
-    if user == nil
+    if user.nil?
       redirect_to tasks_path, notice: 'あなたは管理者ではありません'
     else
       if user.admin == false
@@ -59,5 +62,4 @@ class Admin::UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation, :admin)
   end
-
 end

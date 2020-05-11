@@ -1,11 +1,10 @@
 FactoryBot.define do
   factory :task do
     title { 'task' }
-    limit { Date.new(2020,5,31) }
+    limit { Date.new(2020, 5, 31) }
     status { '未着手' }
     priority { '高' }
     content { 'test_content' }
-    association :user
   end
 
   factory :second_task, class: Task do
@@ -14,6 +13,5 @@ FactoryBot.define do
     status { '完了' }
     priority { '中' }
     content { 'test2_content' }
-    association :user
   end
 end
