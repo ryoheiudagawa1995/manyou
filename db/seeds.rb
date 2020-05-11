@@ -9,12 +9,12 @@ User.create(name: "admin" ,
             email: "admin@gmail.com",
             password: "09090909",
             password_confirmation: "09090909",
-            admin: "true",
+            admin: "true"
             )
 
 User.create(name: "sample" ,
             email: "sample@gmail.com",
             password: "09090909",
             password_confirmation: "09090909",
-            admin: "false",
+            amini: "false"
             )
