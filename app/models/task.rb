@@ -1,6 +1,6 @@
 class Task < ApplicationRecord
   enum priority:[:高,:中,:低]
-  belongs_to :user
+  belongs_to :user, optional: true
 
   validates :title, presence: true
   validates :content, presence: true
