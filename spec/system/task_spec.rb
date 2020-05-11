@@ -28,51 +28,55 @@ RSpec.describe 'タスク管理機能', type: :system do
         visit new_task_path
         fill_in 'Title', with: 'タスク'
         fill_in 'Content', with: 'コンテンツ'
-        fill_in 'Limit', with: Date.new(2020,6,30)
+        fill_in 'Limit', with: Date.new(2020, 6, 30)
         click_on '登録する'
         visit tasks_path
         click_on '終了期限'
+        sleep 0.5
         task_list = all('#limit_row') # タスク一覧を配列として取得するため、View側でidを振っておく
-        expect(task_list[0]).to have_content Date.new(2020,5,31)
-        expect(task_list[1]).to have_content Date.new(2020,6,30)
+        sleep 0.5
+        expect(task_list[0]).to have_content Date.new(2020, 5, 31)
+        expect(task_list[1]).to have_content Date.new(2020, 6, 30)
       end
       it 'タスクが優先順位の昇順に並んでいる' do
         visit new_task_path
         fill_in 'Title', with: 'タスク'
         fill_in 'Content', with: 'コンテンツ'
-        fill_in 'Limit', with: Date.new(2020,6,30)
+        fill_in 'Limit', with: Date.new(2020, 6, 30)
         select '完了', from: 'status'
         select '低', from: 'priority'
         click_on '登録する'
         visit tasks_path
         click_on '優先順位'
+        sleep 0.5
         task_list = all('#priority_row') # タスク一覧を配列として取得するため、View側でidを振っておく
+        sleep 0.5
         expect(task_list[0]).to have_content '高'
         expect(task_list[1]).to have_content '低'
       end
     end
     context 'scopeメソッドで検索をした場合' do
-      it "scopeメソッドでタイトルで検索できる" do
+      it 'scopeメソッドでタイトルで検索できる' do
         new_task = FactoryBot.create(:second_task, user_id: 1)
         visit tasks_path
         fill_in 'title_search', with: 'task'
-        click_on "search"
-      expect(page).to have_content 'task'
+        click_on 'search'
+        expect(page).to have_content 'task'
       end
-      it "scopeメソッドでstatusで検索できる" do
+      it 'scopeメソッドでstatusで検索できる' do
         new_task = FactoryBot.create(:second_task, user_id: 1)
         visit tasks_path
         select '未着手', from: :status_search
-        click_on "search"
-      expect(page).to have_content '未着手'
+        click_on 'search'
+        expect(page).to have_content '未着手'
       end
-      it "scopeメソッドでタイトルとstatusで検索できる" do
+      it 'scopeメソッドでタイトルとstatusで検索できる' do
         new_task = FactoryBot.create(:second_task, user_id: 1)
         visit tasks_path
         fill_in 'title_search', with: 'task'
         select '未着手', from: :status_search
-        click_on "search"
-      expect(page).to have_content 'task', '未着手'
+        click_on 'search'
+        expect(page).to have_content 'task', '未着手'
       end
     end
   end

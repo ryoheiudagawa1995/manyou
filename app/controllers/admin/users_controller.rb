@@ -2,7 +2,6 @@ class Admin::UsersController < ApplicationController
   before_action :set_task, only: %i[show edit update destroy]
   before_action :set_admin
 
-
   def index
     @users = User.all
   end
@@ -24,8 +23,7 @@ class Admin::UsersController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @user.update(user_params)
@@ -41,9 +39,10 @@ class Admin::UsersController < ApplicationController
   end
 
   private
+
   def set_admin
     user = current_user
-    if user == nil
+    if user.nil?
       redirect_to tasks_path, notice: 'あなたは管理者ではありません'
     else
       if user.admin == false
@@ -59,5 +58,4 @@ class Admin::UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation, :admin)
   end
-
 end

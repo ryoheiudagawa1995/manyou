@@ -12,9 +12,7 @@ class TasksController < ApplicationController
     else
       @tasks = current_user.tasks.order(created_at: :DESC).page(params[:page]).per(5)
     end
-
   end
-
 
   def show; end
 

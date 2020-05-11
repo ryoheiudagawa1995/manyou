@@ -21,9 +21,9 @@
         <% else %>
           <td>一般ユーザー</td>
         <% end %>
-        <td><%= link_to 'show', admin_user_path(user) %></td>
-        <td><%= link_to 'Edit', edit_admin_user_path(user) %></td>
-        <td><%= link_to 'Destroy', admin_user_url(user), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td id="show"><%= link_to 'show', admin_user_path(user) %></td>
+        <td id="Edit"><%= link_to 'Edit', edit_admin_user_path(user) %></td>
+        <td ><%= link_to 'Destroy', admin_user_url(user), method: :delete, data: { confirm: 'Are you sure?' }, class: "destroy" %></td>
       </tr>
     <% end %>
   </tbody>

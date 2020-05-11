@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :task do
     title { 'task' }
-    limit { Date.new(2020,5,31) }
+    limit { Date.new(2020, 5, 31) }
     status { '未着手' }
     priority { '高' }
     content { 'test_content' }
