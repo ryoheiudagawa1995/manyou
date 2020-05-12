@@ -29,7 +29,7 @@ class Admin::UsersController < ApplicationController
     if @user.update(user_params)
       redirect_to admin_users_path, notice: 'User was successfully updated.'
     else
-      flash[:alert] = "編集に失敗しました。"
+      flash[:alert] = '編集に失敗しました。'
       render :edit
     end
   end
@@ -38,7 +38,7 @@ class Admin::UsersController < ApplicationController
     if @user.destroy
       redirect_to admin_users_path, notice: 'User was successfully destroyed.'
     else
-      flash[:alert] = "削除に失敗しました。"
+      flash[:alert] = '削除に失敗しました。'
     end
   end
 
