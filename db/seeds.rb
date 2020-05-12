@@ -20,3 +20,6 @@ User.create(name: "sample" ,
             )
 
 Label.create(name: "ruby")
+Label.create(name: "rails")
+Label.create(name: "javascript")
+Label.create(name: "jquery")
