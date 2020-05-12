@@ -18,7 +18,7 @@
   <% end %>
 </div>
 <div class="btn-group">
-  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     ソート <span class="caret"></span>
   </button>
   <ul class="dropdown-menu">
@@ -26,9 +26,7 @@
     <li><%= link_to '終了期限', tasks_path(sort_expired: "true") %></li>
   </ul>
 </div>
-
-<h1>Tasks</h1>
-
+<br><br>
 <table>
   <thead>
     <tr>
