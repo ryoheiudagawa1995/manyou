@@ -21,6 +21,8 @@
       <% end %>
       <%= link_to "タスク一覧", tasks_path %>
       <%= link_to "管理者画面", admin_users_path %>
+      <p id="notice"><%= notice %></p>
+      <p><%= alert %></p>
     </header>
     <div class="main">
       <%= yield %>
