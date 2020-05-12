@@ -37,6 +37,15 @@
     <%= form.select :priority, [["高", "高"], ["中", "中"], ["低", "低"]], include_blank: "選択して下さい" %>
   </div>
 
+
+  <p>Label</p>
+    <% Label.all.each do |label| %>
+      <%= form.check_box :label_ids, { multiple: true, checked: @task.labels.find_by(id: label.id).present?, include_hidden: false }, label[:id] %>
+      <label class='badge badge-secondary'><%= label.name %></label>
+    <% end %>
+
+
+
   <div class="actions">
     <%= form.submit %>
   </div>

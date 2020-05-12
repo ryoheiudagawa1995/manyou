@@ -39,6 +39,7 @@ class Admin::UsersController < ApplicationController
       redirect_to admin_users_path, notice: 'User was successfully destroyed.'
     else
       flash[:alert] = "削除に失敗しました。"
+      render action: :index
     end
   end
 
