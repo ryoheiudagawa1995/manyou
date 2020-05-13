@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe 'ユーザ登録・ログイン・ログアウト機能', type: :system do
+  before do
+    new_user = FactoryBot.create(:user)
+  end
   describe 'ユーザ登録のテスト' do
     context 'ユーザのデータがなくログインしていない場合' do
       it 'ユーザ新規登録のテスト' do
@@ -100,7 +103,7 @@ RSpec.describe 'ユーザ登録・ログイン・ログアウト機能', type: :
         sleep 0.5
         find(:xpath, '/html/body/div/table/tbody/tr[1]/td[5]/a').click
         sleep 0.5
-        expect(current_path).to eq admin_user_path(id: 2)
+        expect(current_path).to eq admin_user_path(id: 1)
       end
       it '管理者はユーザの編集画面からユーザを編集できること' do
         visit tasks_path
@@ -114,7 +117,7 @@ RSpec.describe 'ユーザ登録・ログイン・ログアウト機能', type: :
 
         find(:xpath, '/html/body/div/table/tbody/tr[1]/td[6]/a').click
         sleep 0.5
-        expect(current_path).to eq edit_admin_user_path(id: 2)
+        expect(current_path).to eq edit_admin_user_path(id: 1)
       end
       it '管理者はユーザの削除をできること' do
         visit tasks_path

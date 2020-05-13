@@ -59,3 +59,4 @@ ActiveRecord::Schema.define(version: 2020_05_11_085729) do
   add_foreign_key "labellings", "labels"
   add_foreign_key "labellings", "tasks"
   add_foreign_key "tasks", "users"
+end
