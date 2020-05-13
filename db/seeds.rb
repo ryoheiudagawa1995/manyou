@@ -11,9 +11,14 @@ User.create(name: 'admin',
             password_confirmation: '09090909',
             admin: 'true')
 
+User.create(name: "sample" ,
+            email: "sample@gmail.com",
+            password: "09090909",
+            password_confirmation: "09090909",
+            admin: "false"
+            )
 
-User.create(name: 'sample',
-            email: 'sample@gmail.com',
-            password: '09090909',
-            password_confirmation: '09090909',
-            admin: 'true')
+Label.create(name: "ruby")
+Label.create(name: "rails")
+Label.create(name: "javascript")
+Label.create(name: "jquery")

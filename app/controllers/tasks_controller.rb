@@ -8,7 +8,7 @@ class TasksController < ApplicationController
     elsif params[:sort_priority_expired].present?
       @tasks = current_user.tasks.order(:priority).page(params[:page]).per(5)
     elsif params[:search].present?
-      @tasks = current_user.tasks.search(params[:title_search], params[:status_search]).page(params[:page]).per(5)
+      @tasks = current_user.tasks.search(params[:title_search], params[:status_search], params[:label_ids]).page(params[:page]).per(5)
     else
       @tasks = current_user.tasks.order(created_at: :DESC).page(params[:page]).per(5)
     end
@@ -52,6 +52,7 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:title, :limit, :status, :priority, :content)
+    params.require(:task).permit(:title, :limit, :status, :priority, :content, :user_id, label_ids: [])
   end
+
 end
