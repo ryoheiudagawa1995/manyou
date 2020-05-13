@@ -7,18 +7,30 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+    
   </head>
 
   <body>
-    <% if logged_in? %>
-      <%= link_to "Profile", user_path(current_user.id) %>
-      <%= link_to "Logout", session_path(current_user.id), method: :delete %>
-    <% else %>
-      <%= link_to "Sign up", new_user_path %>
-      <%= link_to "Login", new_session_path %>
-    <% end %>
-    <%= link_to "タスク一覧", tasks_path %>
-    <%= link_to "管理者画面", admin_users_path %>
-    <%= yield %>
+    <header>
+      <h1>Task</h1>
+      <% if logged_in? %>
+        <%= link_to "Profile", user_path(current_user.id) %>
+        <%= link_to "Logout", session_path(current_user.id), method: :delete %>
+      <% else %>
+        <%= link_to "Sign up", new_user_path %>
+        <%= link_to "Login", new_session_path %>
+      <% end %>
+      <%= link_to "タスク一覧", tasks_path %>
+      <%= link_to "管理者画面", admin_users_path %>
+      <p id="notice"><%= notice %></p>
+      <p><%= alert %></p>
+    </header>
+    <div class="main">
+      <%= yield %>
+    </div>
+    <footer>
+      <h6>©️Task</h6>
+    </footer>
   </body>
 </html>

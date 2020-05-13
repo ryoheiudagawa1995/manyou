@@ -1,12 +1,29 @@
 body {
   background-color: #fff;
   color: #333;
-  margin: 33px;
+  margin: 0;
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
   line-height: 18px;
 }
 
+header {
+  background-color: silver;
+  padding: 2%;
+  width: 100%;
+}
+
+footer {
+  background-color: silver;
+  padding: 2%;
+  width: 100%;
+  position: absolute;
+    bottom: 0;
+}
+
+.main {
+  margin: 2%;
+}
 p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
@@ -31,6 +48,15 @@ a {
     background-color: #000;
   }
 }
+table {
+  width: 100%;
+}
+thead {
+  background-color: #d9d9d9;
+}
+tr:nth-child(even) {
+  background: #d9d9d9;
+ }
 
 th {
   padding-bottom: 5px;
@@ -82,3 +108,4 @@ div {
 label {
   display: block;
 }
+// 

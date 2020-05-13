@@ -1,5 +1,5 @@
 class Admin::UsersController < ApplicationController
-  before_action :set_task, only: %i[show edit update destroy]
+  before_action :set_user, only: %i[show edit update destroy]
   before_action :set_admin
 
   def index
@@ -29,7 +29,7 @@ class Admin::UsersController < ApplicationController
     if @user.update(user_params)
       redirect_to admin_users_path, notice: 'User was successfully updated.'
     else
-      flash[:alert] = "編集に失敗しました。"
+      flash[:alert] = '編集に失敗しました。'
       render :edit
     end
   end
@@ -38,7 +38,8 @@ class Admin::UsersController < ApplicationController
     if @user.destroy
       redirect_to admin_users_path, notice: 'User was successfully destroyed.'
     else
-      flash[:alert] = "削除に失敗しました。"
+      flash[:alert] = '削除出来ません。'
+      redirect_to admin_users_path
     end
   end
 
@@ -55,7 +56,7 @@ class Admin::UsersController < ApplicationController
     end
   end
 
-  def set_task
+  def set_user
     @user = User.find(params[:id])
   end
 
