@@ -5,10 +5,10 @@ body {
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
   line-height: 18px;
-  overflow: scroll;
+  height: 100%;
 }
-
-.search-form {
+.main {
+  height: 60%;
   overflow: scroll;
 }
 
@@ -27,6 +27,7 @@ footer {
 }
 
 .main {
+  height: 100%;
   margin: 2%;
 }
 p, ol, ul, td {
@@ -65,10 +66,16 @@ tr:nth-child(even) {
 
 th {
   padding-bottom: 5px;
+  text-align: center;
 }
 
 td {
   padding: 0 5px 7px;
+  text-align: center;
+}
+td#label {
+  border: white;
+
 }
 
 div {
@@ -110,7 +117,15 @@ div {
   }
 }
 
-label {
-  display: block;
+.label label {
+  background-color: gray;
+  margin: auto;
+  padding: 0.1rem 0.1rem 0.2rem 0.1rem;
+  border-radius: 0.3rem;
 }
+
+input {
+  margin: 0.5rem;
+}
+
 //
