@@ -2,11 +2,13 @@ require 'rails_helper'
 RSpec.describe 'タスク管理機能', type: :system do
   before do
     FactoryBot.create(:user)
+    FactoryBot.create(:label)
+    FactoryBot.create(:second_label)
     visit new_session_path
     fill_in 'session[email]', with: 'sample@example.com'
     fill_in 'session[password]', with: '00000000'
     click_on 'Log in'
-    new_task = FactoryBot.create(:task, user_id: 1)
+    new_task = FactoryBot.create(:task, user_id: 1 )
   end
   describe 'タスク一覧画面' do
     context 'タスクを作成した場合' do
@@ -98,6 +100,20 @@ RSpec.describe 'タスク管理機能', type: :system do
         visit tasks_path
         click_on 'Show'
         expect(page).to have_content 'title', 'task'
+      end
+    end
+  end
+  describe 'ラベル使用' do
+    context '任意のタスク詳細画面に遷移した場合' do
+      it 'タスク作成時にラベルを追加' do
+        visit new_task_path
+        fill_in 'Title', with: 'タスク'
+        fill_in 'Content', with: 'コンテンツ'
+        fill_in 'Limit', with: Date.new(2020, 6, 30)
+        select '完了', from: 'status'
+        select '低', from: 'priority'
+        check 'ruby'
+        click_on '登録する'
       end
     end
   end

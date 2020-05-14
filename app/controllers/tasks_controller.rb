@@ -8,20 +8,22 @@ class TasksController < ApplicationController
     elsif params[:sort_priority_expired].present?
       @tasks = current_user.tasks.order(:priority).page(params[:page]).per(5)
     elsif params[:search].present?
-      @tasks = current_user.tasks.search(params[:title_search], params[:status_search], params[:label_id]).page(params[:page]).per(5)
-      #if params[:title_search].present? && params[:status_search].present?
-        #@tasks = current_user.tasks.where('title like? AND status like?', "%#{params[:title_search]}%", params[:status_search].to_s).page(params[:page]).per(5)
-      #elsif params[:title_search].present?
-        #@tasks = current_user.tasks.where('title like?', "%#{params[:title_search]}%").page(params[:page]).per(5)
-      #elsif params[:status_search].present?
-        #@tasks = current_user.tasks.where(status: params[:status_search]).page(params[:page]).per(5)
-      #elsif params[:label_id].present?
-        #params[:label_ids].each do |label|
-          #@tasks = current_user.tasks.where(id: Labelling.where(label_id: params[:label_id]).pluck(:task_id)).page(params[:page]).per(5)
-        #end
-      #else
-        #@tasks = current_user.tasks.order(created_at: :DESC).page(params[:page]).per(5)
-      #end
+      #@tasks = current_user.tasks.search(params[:title_search], params[:status_search], params[:label_id]).page(params[:page]).per(5)
+      if params[:title_search].present? && params[:status_search].present?
+        @tasks = current_user.tasks.where('title like? AND status like?', "%#{params[:title_search]}%", params[:status_search].to_s).page(params[:page]).per(5)
+      elsif params[:title_search].present?
+        @tasks = current_user.tasks.where('title like?', "%#{params[:title_search]}%").page(params[:page]).per(5)
+      elsif params[:status_search].present?
+        @tasks = current_user.tasks.where(status: params[:status_search]).page(params[:page]).per(5)
+      elsif params[:label_ids].present?
+          @tasks = []
+        params[:label_ids].each do |label|
+          @tasks += current_user.tasks.where(id: Labelling.where(label_id: label).pluck(:task_id))
+        end
+        @tasks = Kaminari.paginate_array(@tasks).page(params[:page]).per(5)
+      else
+        @tasks = current_user.tasks.order(created_at: :DESC).page(params[:page]).per(5)
+      end
     else
       @tasks = current_user.tasks.order(created_at: :DESC).page(params[:page]).per(5)
     end

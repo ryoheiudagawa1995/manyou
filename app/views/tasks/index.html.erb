@@ -11,7 +11,6 @@
     </div>
     <div class="field">
       <%= form.label :label %>
-      <%= form.select("label_id", Label.pluck(:name, :id), { include_blank: true }) %>
       <% Label.all.each do |label| %>
         <%= form.check_box :label_ids, { multiple: true, checked: label[:checked], disabled: label[:disabled], include_hidden: false }, label[:id].to_i %>
         <label class='badge badge-secondary'><%= label.name %></label>
