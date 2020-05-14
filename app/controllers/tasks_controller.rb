@@ -15,12 +15,12 @@ class TasksController < ApplicationController
         @tasks = current_user.tasks.where('title like?', "%#{params[:title_search]}%").page(params[:page]).per(5)
       elsif params[:status_search].present?
         @tasks = current_user.tasks.where(status: params[:status_search]).page(params[:page]).per(5)
-      elsif params[:label_ids].present?
+      elsif params[:label_ids][0].present?
           @tasks = []
         params[:label_ids].each do |label|
           @tasks += current_user.tasks.where(id: Labelling.where(label_id: label).pluck(:task_id))
         end
-        @tasks = Kaminari.paginate_array(@tasks).page(params[:page]).per(5)
+        @tasks = Kaminari.paginate_array(@tasks.uniq).page(params[:page]).per(5)
       else
         @tasks = current_user.tasks.order(created_at: :DESC).page(params[:page]).per(5)
       end

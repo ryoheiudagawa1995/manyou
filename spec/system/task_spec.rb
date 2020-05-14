@@ -112,8 +112,46 @@ RSpec.describe 'タスク管理機能', type: :system do
         fill_in 'Limit', with: Date.new(2020, 6, 30)
         select '完了', from: 'status'
         select '低', from: 'priority'
-        check 'ruby'
+        check "ruby"
+        sleep 0.5
         click_on '登録する'
+        visit tasks_path
+        sleep 0.5
+        expect(page).to have_content 'label', 'ruby'
+      end
+    end
+    context '任意のタスク詳細画面に遷移した場合' do
+      it 'タスクの詳細でラベルを確認' do
+        visit new_task_path
+        fill_in 'Title', with: 'タスク'
+        fill_in 'Content', with: 'コンテンツ'
+        fill_in 'Limit', with: Date.new(2020, 6, 30)
+        select '完了', from: 'status'
+        select '低', from: 'priority'
+        check "ruby"
+        sleep 0.5
+        click_on '登録する'
+        sleep 0.5
+        expect(page).to have_content 'ruby'
+      end
+    end
+    context '任意のタスク詳細画面に遷移した場合' do
+      it 'ラベルで検索' do
+        visit new_task_path
+        fill_in 'Title', with: 'タスク'
+        fill_in 'Content', with: 'コンテンツ'
+        fill_in 'Limit', with: Date.new(2020, 6, 30)
+        select '完了', from: 'status'
+        select '低', from: 'priority'
+        check "ruby"
+        click_on '登録する'
+        visit tasks_path
+        check "ruby"
+        click_on 'search'
+        sleep 0.5
+        label_list = all('#label') # タスク一覧を配列として取得するため、View側でidを振っておく
+        sleep 0.5
+        expect(label_list[0]).to have_content 'ruby'
       end
     end
   end

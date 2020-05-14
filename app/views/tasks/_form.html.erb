@@ -38,10 +38,8 @@
   </div>
 
   <div class="field">
-    <%= form.label :label %>
-    <% Label.all.each do |label| %>
-      <%= form.check_box :label_ids, { multiple: true, checked: label[:checked], disabled: label[:disabled], include_hidden: false }, label[:id] %>
-      <label class='badge badge-secondary'><%= label.name %></label>
+    <%= form.collection_check_boxes(:label_ids, Label.all, :id, :name)  do |b| %>
+      <%= b.label { b.check_box + b.text } %>
     <% end %>
   </div>
 

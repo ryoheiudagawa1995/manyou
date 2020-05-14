@@ -10,10 +10,8 @@
       <%= form.select :status_search, [["未着手", "未着手"], ["着手中", "着手中"], ["完了", "完了"]], include_blank: "選択して下さい" %>
     </div>
     <div class="field">
-      <%= form.label :label %>
-      <% Label.all.each do |label| %>
-        <%= form.check_box :label_ids, { multiple: true, checked: label[:checked], disabled: label[:disabled], include_hidden: false }, label[:id].to_i %>
-        <label class='badge badge-secondary'><%= label.name %></label>
+      <%= form.collection_check_boxes(:label_ids, Label.all, :id, :name) do |b| %>
+        <%= b.label { b.check_box + b.text } %>
       <% end %>
     </div>
     <div class="actions">
@@ -53,7 +51,7 @@
           <td id='limit_row'><%= task.limit %></td>
           <td><%= task.status %></td>
           <td id='priority_row'><%= task.priority %></td>
-          <td>
+          <td id="label">
             <% task.labels.each do |label| %>
             <%= label.name %>
             <% end %>
