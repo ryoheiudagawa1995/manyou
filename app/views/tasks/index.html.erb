@@ -11,8 +11,9 @@
     </div>
     <div class="field">
       <%= form.label :label %>
+      <%= form.select("label_id", Label.pluck(:name, :id), { include_blank: true }) %>
       <% Label.all.each do |label| %>
-        <%= form.check_box :label_ids, { multiple: true, checked: label[:checked], disabled: label[:disabled], include_hidden: false }, label[:id] %>
+        <%= form.check_box :label_ids, { multiple: true, checked: label[:checked], disabled: label[:disabled], include_hidden: false }, label[:id].to_i %>
         <label class='badge badge-secondary'><%= label.name %></label>
       <% end %>
     </div>
@@ -31,11 +32,8 @@
     <li><%= link_to '終了期限', tasks_path(sort_expired: "true") %></li>
   </ul>
 </div>
-<<<<<<< HEAD
 <br><br>
-=======
 
->>>>>>> step5
 <table>
   <thead>
     <tr>
@@ -49,23 +47,23 @@
   </thead>
 
   <tbody>
-    <% @tasks.each do |task| %>
-      <tr>
-        <td id='task_row' ><%= task.title %></td>
-        <td><%= task.content %></td>
-        <td id='limit_row'><%= task.limit %></td>
-        <td><%= task.status %></td>
-        <td id='priority_row'><%= task.priority %></td>
-        <td>
-          <% task.labels.each do |label| %>
-          <%= label.name %>
-          <% end %>
-        </td>
-        <td><%= link_to 'Show', task %></td>
-        <td><%= link_to 'Edit', edit_task_path(task) %></td>
-        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
+      <% @tasks.each do |task| %>
+        <tr>
+          <td id='task_row' ><%= task.title %></td>
+          <td><%= task.content %></td>
+          <td id='limit_row'><%= task.limit %></td>
+          <td><%= task.status %></td>
+          <td id='priority_row'><%= task.priority %></td>
+          <td>
+            <% task.labels.each do |label| %>
+            <%= label.name %>
+            <% end %>
+          </td>
+          <td><%= link_to 'Show', task %></td>
+          <td><%= link_to 'Edit', edit_task_path(task) %></td>
+          <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
     <%= paginate @tasks %>
   </tbody>
 </table>
