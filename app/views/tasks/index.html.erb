@@ -44,7 +44,7 @@
   </thead>
 
   <tbody>
-      <% @tasks.each do |task| %>
+      <% @tasks.preload(:labels).each do |task| %>
         <tr>
           <td id='task_row' ><%= task.title %></td>
           <td><%= task.content %></td>
