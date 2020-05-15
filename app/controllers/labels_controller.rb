@@ -1,9 +1,8 @@
 class LabelsController < ApplicationController
   before_action :set_label, only: [:show, :edit, :update, :destroy]
-
-  # GET /labels
+  
   def index
-    @labels = Label.all
+    @labels = current_user.labels + Label.where(user_id: nil)
   end
 
   # GET /labels/1
@@ -22,7 +21,6 @@ class LabelsController < ApplicationController
   # POST /labels
   def create
     @label = Label.new(label_params)
-
     if @label.save
       redirect_to @label, notice: 'Label was successfully created.'
     else
@@ -53,6 +51,6 @@ class LabelsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def label_params
-      params.require(:label).permit(:name)
+      params.require(:label).permit(:name, :user_id)
     end
 end

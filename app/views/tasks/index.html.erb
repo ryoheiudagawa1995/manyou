@@ -10,19 +10,19 @@
       <%= form.select :status_search, [["未着手", "未着手"], ["着手中", "着手中"], ["完了", "完了"]], include_blank: "選択して下さい" %>
     </div>
     <div class="label">
-      <%= form.collection_check_boxes(:label_ids, Label.all, :id, :name) do |b| %>
+      <%= form.collection_check_boxes(:label_ids, current_user.labels + Label.where(user_id: nil), :id, :name) do |b| %>
         <%= b.label { b.check_box + b.text } %>
       <% end %>
     </div>
+    <br>
     <div class="actions">
       <%= form.submit 'search',name: nil%>
     </div>
-
   <% end %>
 </div>
 <div class="btn-group">
   <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    ソート <span class="caret"></span>
+   並び変え <span class="caret"></span>
   </button>
   <ul class="dropdown-menu">
     <li><%= link_to '優先順位', tasks_path(sort_priority_expired: "true") %></li>

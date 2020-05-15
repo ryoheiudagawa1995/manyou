@@ -105,6 +105,16 @@ RSpec.describe 'タスク管理機能', type: :system do
   end
   describe 'ラベル使用' do
     context '任意のタスク詳細画面に遷移した場合' do
+      it 'ラベルを作成' do
+        visit new_label_path
+        fill_in 'Name', with: 'Unko'
+        click_on '登録する'
+        visit labels_path
+        sleep 0.5
+        expect(page).to have_content 'Unko'
+      end
+    end
+    context '任意のタスク詳細画面に遷移した場合' do
       it 'タスク作成時にラベルを追加' do
         visit new_task_path
         fill_in 'Title', with: 'タスク'
