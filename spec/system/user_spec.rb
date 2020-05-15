@@ -114,7 +114,6 @@ RSpec.describe 'ユーザ登録・ログイン・ログアウト機能', type: :
         click_on 'Log in'
         visit admin_users_path
         sleep 0.5
-
         find(:xpath, '/html/body/div/table/tbody/tr[1]/td[6]/a').click
         sleep 0.5
         expect(current_path).to eq edit_admin_user_path(id: 1)
@@ -127,10 +126,11 @@ RSpec.describe 'ユーザ登録・ログイン・ログアウト機能', type: :
         fill_in 'session[password]', with: '00000000'
         click_on 'Log in'
         visit admin_users_path
-        # binding.irb
-        # destroy_list = all('.destroy') # タスク一覧を配列として取得するため、View側でidを振っておく
-        find(:xpath, '/html/body/div/table/tbody/tr[1]/td[7]/a').click # click_on destroy_list[1]
-        expect(User.count).not_to eq 1
+        find(:xpath, '/html/body/div/table/tbody/tr[1]/td[7]/a').click
+        sleep 0.5
+        page.accept_confirm 'Are you sure?'
+        sleep 0.5
+        expect(User.count).to eq(1)
       end
     end
   end

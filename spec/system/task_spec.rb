@@ -21,7 +21,7 @@ RSpec.describe 'タスク管理機能', type: :system do
       it 'タスクが作成日時の降順に並んでいる' do
         new_task = FactoryBot.create(:second_task, user_id: 1)
         visit tasks_path
-        task_list = all('#task_row') # タスク一覧を配列として取得するため、View側でidを振っておく
+        task_list = all('#task_row')
         expect(task_list[0]).to have_content 'new_task'
         expect(task_list[1]).to have_content 'task'
       end
@@ -105,13 +105,23 @@ RSpec.describe 'タスク管理機能', type: :system do
   end
   describe 'ラベル使用' do
     context '任意のタスク詳細画面に遷移した場合' do
-      it 'ラベルを作成' do
+      it 'ラベルの作成' do
         visit new_label_path
         fill_in 'Name', with: 'Unko'
         click_on '登録する'
         visit labels_path
         sleep 0.5
         expect(page).to have_content 'Unko'
+      end
+    end
+    context '任意のタスク詳細画面に遷移した場合' do
+      it 'ラベルの削除' do
+        visit labels_path
+        find(:xpath, '/html/body/div/table/tbody/tr[1]/td[4]/a').click
+        sleep 0.5
+        page.accept_confirm 'Are you sure?'
+        sleep 0.5
+        expect(Label.count).to eq 1
       end
     end
     context '任意のタスク詳細画面に遷移した場合' do
