@@ -21,9 +21,14 @@
         <%= link_to "Sign up", new_user_path %>
         <%= link_to "Login", new_session_path %>
       <% end %>
-      <%= link_to "タスク一覧", tasks_path %>
-      <%= link_to 'ラベル一覧', labels_path %>
-      <%= link_to "管理者画面", admin_users_path %>
+      <% if logged_in? %>
+        <%= link_to "タスク一覧", tasks_path %>
+        <%= link_to 'ラベル一覧', labels_path %>
+        <% if current_user.admin == true %>
+          <%= link_to "管理者画面", admin_users_path %>
+        <% end %>  
+      <% end %>
+
       <p id="notice"><%= notice %></p>
       <p><%= alert %></p>
     </header>
