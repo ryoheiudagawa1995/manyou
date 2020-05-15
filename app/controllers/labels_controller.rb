@@ -3,7 +3,7 @@ class LabelsController < ApplicationController
   before_action :authenticate_user
 
   def index
-    @labels = current_user.labels + Label.where(user_id: 1)
+    @labels = current_user.labels + Label.where(user_id: 99)
   end
 
   # GET /labels/1

@@ -10,7 +10,7 @@
       <%= form.select :status_search, [["未着手", "未着手"], ["着手中", "着手中"], ["完了", "完了"]], include_blank: "選択して下さい" %>
     </div>
     <div class="label">
-      <%= form.collection_check_boxes(:label_ids, current_user.labels + Label.where(user_id: 1), :id, :name) do |b| %>
+      <%= form.collection_check_boxes(:label_ids, current_user.labels + Label.where(user_id: 99), :id, :name) do |b| %>
         <%= b.label { b.check_box + b.text } %>
       <% end %>
     </div>

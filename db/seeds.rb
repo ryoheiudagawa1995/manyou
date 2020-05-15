@@ -18,7 +18,7 @@ User.create(name: "sample" ,
             admin: "false"
             )
 
-User.create(id: 1,
+User.create(id: 99,
             name: "defalut" ,
             email: "defalut@gmail.com",
             password: "09090909",
@@ -27,11 +27,11 @@ User.create(id: 1,
             )
 
 Label.create(name: "ruby",
-             user_id: 1
+             user_id: 99
             )
 Label.create(name: "rails",
-             user_id: 1
+             user_id: 99
             )
 Label.create(name: "javascript",
-             user_id: 1
+             user_id: 99
             )
