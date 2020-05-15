@@ -1,6 +1,11 @@
 require_relative 'boot'
 
-
+require 'rails/all'
+if Rails.env == 'production'
+  http_basic_authenticate_with name: ENV['BASIC_AUTH_USERNAME'], password: ENV['BASIC_AUTH_PASSWORD']
+end
+# Require the gems listed in Gemfile, including any gems
+# you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
 module Manyou
