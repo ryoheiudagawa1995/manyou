@@ -18,7 +18,20 @@ User.create(name: "sample" ,
             admin: "false"
             )
 
-Label.create(name: "ruby")
-Label.create(name: "rails")
-Label.create(name: "javascript")
-Label.create(name: "jquery")
+User.create(id: 1,
+            name: "defalut" ,
+            email: "defalut@gmail.com",
+            password: "09090909",
+            password_confirmation: "09090909",
+            admin: "true"
+            )
+
+Label.create(name: "ruby",
+             user_id: 1
+            )
+Label.create(name: "rails",
+             user_id: 1
+            )
+Label.create(name: "javascript",
+             user_id: 1
+            )

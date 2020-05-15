@@ -1,8 +1,9 @@
 class LabelsController < ApplicationController
   before_action :set_label, only: [:show, :edit, :update, :destroy]
-  
+  before_action :authenticate_user
+
   def index
-    @labels = current_user.labels + Label.where(user_id: nil)
+    @labels = current_user.labels + Label.where(user_id: 1)
   end
 
   # GET /labels/1

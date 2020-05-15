@@ -69,13 +69,4 @@ class TasksController < ApplicationController
   def task_params
     params.require(:task).permit(:title, :limit, :status, :priority, :content, :user_id, label_ids: [])
   end
-
-  def task_id_research
-
-    params[:label_ids].each do |label|
-      task_research = Labelling.where(label_id: label).pluck(:task_id)
-    end
-
-  end
-
 end
