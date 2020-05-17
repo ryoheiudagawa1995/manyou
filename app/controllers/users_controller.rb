@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+  def index
+    @users = User.all
+  end
   def new
     if logged_in?
       redirect_to user_path(session[:user_id])

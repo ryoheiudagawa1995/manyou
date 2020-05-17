@@ -28,7 +28,7 @@
           <%= link_to "管理者画面", admin_users_path %>
         <% end %>
       <% end %>
-
+      <%= link_to 'ユーザー一覧', users_path if logged_in? %>
       <p id="notice"><%= notice %></p>
       <p><%= alert %></p>
     </header>

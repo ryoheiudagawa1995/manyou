@@ -1,0 +1,19 @@
+<h2>ユーザー</h2>
+  <% @users.each do |user| %>
+    <%= user.name %>
+    <%= user.email %>
+    <%= render 'follow_form', user: user %>
+    <%= link_to "ユーザー詳細画面", user_path(user) %>
+  <% end %>
+    <br>
+    <% @users.each do |user| %>
+      <% if user.id != current_user.id %>
+        <li>
+          <div class="item">
+            <%= link_to user.name, user %>
+            <%= link_to 'メッセージ', conversations_path(sender_id: current_user.id, recipient_id: user.id), method: :post %>
+          </div>
+        </li>
+        <li><%= render 'follow_form', user: user %></li> <!-- フォロー機能が実装されて入ればこの一文も必要 -->
+      <% end %>
+    <% end %>
